@@ -22,24 +22,31 @@ int telNumber(string &operation){
     return input;
 }
 int main() {
-    map<string, int> telephone;
-    telephone.insert(make_pair<string, int>("ivanov", 331525));
-    telephone.insert(make_pair<string, int>("pavlov", 551241));
-    telephone.insert(make_pair<string, int>("sidorov", 361655));
+    map<int, string> telephone;
+    //init telephone book
+    telephone.insert(make_pair<int, string>(748596, "pavlov"));
+    telephone.insert(make_pair<int, string>(331525, "ivanov"));
+    telephone.insert(make_pair<int, string>(551241, "pavlov"));
+    telephone.insert(make_pair<int, string>(361655, "sidorov"));
+
     string operation;
     cout << "Enter operation\n";
     while(operation != "exit") {
         getline(cin, operation);
         if (operation == "exit") continue;
+
         if (operation[0] >= 'a' && operation[0] <= 'z') {
-            cout << telephone[operation] << endl;
+            for (map<int, string>::iterator searchFamily = telephone.begin(); searchFamily != telephone.end(); ++searchFamily){
+                if (searchFamily->second == operation) cout << searchFamily->first << " ";
+            }
+            cout << endl;
         } else if (operation[0] >= '0' && operation[0] <= '9') {
             if (operation.back() >= 'a' && operation.back() <= 'z') {
-                telephone.insert(pair<string, int>(family(operation), stoi(operation)));
+                telephone.insert(pair<int, string>(stoi(operation), family(operation)));
             } else {
-                for (map<string, int>::iterator numb = telephone.begin(); numb != telephone.end(); ++numb) {
-                    if (stoi(operation) == numb->second) {
-                        cout << numb->first << endl;
+                for (map<int, string>::iterator numb = telephone.begin(); numb != telephone.end(); ++numb) {
+                    if (stoi(operation) == numb->first) {
+                        cout << numb->second << endl;
                     }
                 }
             }
