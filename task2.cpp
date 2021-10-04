@@ -7,7 +7,7 @@ int main(){
     map<string, int> patient;
     cout << "Enter name new patient or next or exit\n";
     string action;
-    while (action != "exit"){
+    do{
         cin >> action;
         // if exit
         if (action != "exit"){
@@ -24,9 +24,13 @@ int main(){
             }
             // if next
             else if (action == "next"){
-
+                cout << patient.begin()->first << endl;
+                patient.begin()->second--;
+                if (patient.begin()->second <= 0){
+                    patient.erase(patient.begin());
+                }
             }
         }else if (action == "exit") break;
-    }
+    } while (action != "exit" && patient.size() > 0);
     return 0;
 }
