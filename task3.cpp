@@ -18,8 +18,7 @@ int main(){
             if (sy != '\n' && sy != ' ') wordTwo.insert({sy, 1});
         }else if (sy != '\n' && sy != ' ') wordOne.insert({sy, 1});
     }
-    bool anagram = wordOne == wordTwo;
-    if (anagram){
+    if (wordOne == wordTwo){
         cout << "the words anagram\n";
     }else cout << "the words not anagram\n";
     return 0;
