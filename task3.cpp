@@ -2,23 +2,27 @@
 #include <map>
 #include <string>
 using namespace std;
-
+bool chekAnagram(string &strOne, string &strTwo){
+    map<string, string> words;
+    words.insert(pair(strOne, strTwo));
+    int sumCharOne = 0;
+    int sumCharTwo = 0;
+    if (words.begin()->second.length() == words.begin()->first.length()){
+        for (int i = 0;i < words.begin()->second.length(); i++){
+            sumCharOne += int(words.begin()->first[i]);
+            sumCharTwo += int(words.begin()->second[i]);
+        }
+    }else return false;
+    return sumCharOne == sumCharTwo;
+}
 int main(){
-    map<char, int> wordOne;
-    map<char, int> wordTwo;
-    char sy;
     string strOne = "";
     string strTwo = "";
-    bool newStr = false;
-    cout << "Enter word in format : 'first word' 'second word'\n";
-    while(sy != '\n') {
-        cin.read(&sy, 1);
-        if (sy == ' ') newStr = true;
-        if (newStr) {
-            if (sy != '\n' && sy != ' ') wordTwo.insert({sy, 1});
-        }else if (sy != '\n' && sy != ' ') wordOne.insert({sy, 1});
-    }
-    if (wordOne == wordTwo){
+    cout << "Enter first word\n";
+    cin >> strOne;
+    cout << "Enter second word\n";
+    cin >> strTwo;
+    if (chekAnagram(strOne, strTwo)){
         cout << "the words anagram\n";
     }else cout << "the words not anagram\n";
     return 0;
